@@ -26,7 +26,6 @@ Simple offer register for a cashback app
 
 **The test user has email: test@test.com and password: 123456**
 
-
 **OR**
 
 Run the project localy: (ps: You will need rails and bundler installed in your machine!)
@@ -56,6 +55,12 @@ Run the project localy: (ps: You will need rails and bundler installed in your m
 ```shell
   rails s -b 0.0.0.0 -p 3000
 ```
+
+## Online Demo
+
+You can find an online demo at: [Heroku](https://afternoon-meadow-36285.herokuapp.com/)
+
+**The test user has email: test@test.com and password: 123456**
 
 ## Tests and Coverage
 
