@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2020_05_12_182251) do
     t.text "description"
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.boolean "enabled"
-    t.boolean "premium"
+    t.boolean "enabled", default: false
+    t.boolean "premium", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["advertiser_name"], name: "index_offers_on_advertiser_name", unique: true

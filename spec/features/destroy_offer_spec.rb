@@ -18,4 +18,12 @@ RSpec.feature "DestroyOffers", :js => true, type: :feature do
       end
     end
   end
+
+  context 'with user not logged in' do
+    it 'must redirect to sign_in page' do
+      visit '/admin'
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
+      expect(page).to have_current_path(new_user_session_path)
+    end
+  end
 end

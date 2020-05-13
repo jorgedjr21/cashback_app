@@ -34,6 +34,33 @@ RSpec.describe OffersController, type: :controller do
     end
   end
 
+  describe 'PUT /enable' do
+    let!(:offer) { create(:offer, advertiser_name: 'Can Enable', starts_at: Time.zone.now - 3.hours) }
+    let!(:offer_2) { create(:offer, advertiser_name: 'Cant Enable', starts_at: Time.zone.now - 3.days, ends_at: Time.zone.now - 2.days) }
+    
+    context 'signed_in' do
+      before :each do
+        sign_in user
+      end
+
+      context 'when offer can be enabled' do
+        it 'must enable the offer' do
+          put :enable, params: { id: offer.id }
+
+          expect(offer.reload.enabled).to be_truthy
+        end
+      end
+
+      context 'when offer cant be enabled' do
+        it 'must doesnt enable the offer' do
+          put :enable, params: { id: offer_2.id }
+
+          expect(offer_2.reload.enabled).to be_falsey
+        end
+      end
+    end
+  end
+
   describe 'POST /offers' do
     context 'not signed_in' do
       context 'with valid attributes' do

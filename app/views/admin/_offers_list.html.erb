@@ -16,21 +16,21 @@
         <tr>
           <td><%= offer.advertiser_name %></td>
           <td><%= offer.url %></td>
-          <td><%= offer.description.truncate(25)%></td>
-          <td><%= offer.starts_at.strftime('%d/%m/%Y %H:%M') %></td>
-          <td><%= offer.ends_at %></td>
+          <td><%= offer.description&.truncate(25)%></td>
+          <td><%= offer.starts_at&.strftime('%d/%m/%Y %H:%M') %></td>
+          <td><%= offer.ends_at&.strftime('%d/%m/%Y %H:%M') %></td>
           <td class="<%= offer.premium? ? 'text-success' : 'text-warning' %>">
             <strong><%= offer.premium? ? 'Yes' : 'No' %></strong>
           </td>
           <td><a href="#">Edit</a></td>
           <td>
           <% if offer.enabled? %>
-            <a href="#">Disable</a>
+            <%= link_to 'Disable', disable_offer_path(offer), method: 'put', class: 'btn btn-outline-warning' %>
           <% else %>
-            <a href="#"> Enable</a>
+            <%= link_to 'Enable', enable_offer_path(offer), method: 'put', class: 'btn btn-outline-success' %>
           <% end %>
           </td>
-          <td><%= link_to 'Destroy', offer_path(offer), method: 'delete', data: { confirm: "Do you really wanna destroy the offer #{offer.id}", disable_with: 'Processing...' } %></td>
+          <td><%= link_to 'Destroy', offer_path(offer), method: 'delete', class: 'btn btn-outline-danger' , data: { confirm: "Do you really wanna destroy the offer #{offer.id}", disable_with: 'Processing...' } %></td>
         </tr>
       <% end %>
     <% else %>
