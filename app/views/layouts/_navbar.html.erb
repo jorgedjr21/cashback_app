@@ -6,18 +6,20 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item <%= 'active' if params[:controller] == 'home'%>">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item <%= 'active' if params[:controller] == 'admin'%>">
+          <a class="nav-link" href="<%= admin_path %>">Admin</a>
+        </li>
+      <% end %>
     </ul>
 
     <% if user_signed_in? %>
       <%= link_to 'Logout', destroy_user_session_path, class: 'btn btn-secondary my-2', method: :delete %> 
     <% else %>
-      <a class="btn btn-secondary my-2 my-lg-0" href="<%= new_user_session_path %>">Login</a>
+      <a class="btn btn-secondary my-2" href="<%= new_user_session_path %>">Login</a>
     <% end %>
   </div>
 </nav>

@@ -1,12 +1,17 @@
-<div class="row">
-  <div class="col-md-12">
-    <h2> Welcome to Cashback App,  <%= current_user.name %> </h2>
-  </div>
+<div class="pb-2 mt-4 mb-2 border-bottom">
+      <h2> Welcome to Cashback App,  <%= current_user.name %> </h2>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-
+    <div class="card">
+      <div class="card-header">
+        <h3>Offers List <a href="<%= new_offer_path %>" class='btn btn-secondary float-right'>New Offer</a></h3>
+      </div>
+      <div class="card-body">
+        <%= render 'offers_list', offers: @offers %>
+      </div>
+    </div>
   </div>
 </div>
   

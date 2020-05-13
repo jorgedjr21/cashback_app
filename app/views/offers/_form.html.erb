@@ -1,0 +1,21 @@
+<%= simple_form_for @offer do |f| %>
+  <div class="card-body">
+
+    <%= f.input :advertiser_name, hint: 'You should not repeat advertiser_name' %>
+    <%= f.input :url, hint: 'Must be a valid URL format, like: http://test.com' %>
+    <%= f.input :description, hint: 'Maximum 500 chars' %>
+
+    <div class='row'>
+      <div class='col-md-6'>
+        <%= f.input :starts_at, as: 'string', input_html: { class: 'date' }, hint: 'example: 10/01/2020 05:00'  %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.input :ends_at, as: 'string', input_html: { class: 'date' }, hint: 'example: 10/01/2020 05:00' %>
+      </div>
+    </div>
+    <%= f.input :premium %>
+  </div>
+  <div class="card-footer text-center">
+    <%= f.submit 'Create Offer', class: 'btn btn-secondary' %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Advertiser Name</th>
+      <th>URL</th>
+      <th>Desription</th>
+      <th>Starts At</th>
+      <th>Ends at</th>
+      <th>Premium?</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% offers.each do |offer| %>
+      <tr>
+        <td><%= offer.advertiser_name %></td>
+        <td><%= offer.url %></td>
+        <td><%= offer.description.truncate(25)%></td>
+        <td><%= offer.starts_at.strftime('%d/%m/%Y %H:%M') %></td>
+        <td><%= offer.ends_at %></td>
+        <td class="<%= offer.premium? ? 'text-success' : 'text-warning' %>">
+          <strong><%= offer.premium? ? 'Yes' : 'No' %></strong>
+        </td>
+        <td><a href="#">Edit</a></td>
+        <td>
+        <% if offer.enabled? %>
+          <a href="#">Disable</a>
+        <% else %>
+          <a href="#"> Enable</a>
+        <% end %>
+        </td>
+        <td><a href="#">Destroy</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

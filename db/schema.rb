@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 2020_05_12_182251) do
     t.string "advertiser_name"
     t.string "url"
     t.text "description"
-    t.date "starts_at"
-    t.date "ends_at"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean "enabled"
     t.boolean "premium"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
