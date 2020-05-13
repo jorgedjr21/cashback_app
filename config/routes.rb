@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/admin', to: 'admin#index'
-  resources 'offers', only: [:new, :create]
+  resources 'offers', only: [:new, :create, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'home#index'

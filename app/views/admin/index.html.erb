@@ -6,7 +6,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3>Offers List <a href="<%= new_offer_path %>" class='btn btn-secondary float-right'>New Offer</a></h3>
+        <h3>Offers: <%= @offers.count %> <a href="<%= new_offer_path %>" class='btn btn-secondary float-right'>New Offer</a></h3>
       </div>
       <div class="card-body">
         <%= render 'offers_list', offers: @offers %>

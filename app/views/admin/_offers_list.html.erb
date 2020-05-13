@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>Advertiser Name</th>
@@ -11,25 +11,31 @@
     </tr>
   </thead>
   <tbody>
-    <% offers.each do |offer| %>
+  <% if offers.count > 0 %>
+      <% offers.each do |offer| %>
+        <tr>
+          <td><%= offer.advertiser_name %></td>
+          <td><%= offer.url %></td>
+          <td><%= offer.description.truncate(25)%></td>
+          <td><%= offer.starts_at.strftime('%d/%m/%Y %H:%M') %></td>
+          <td><%= offer.ends_at %></td>
+          <td class="<%= offer.premium? ? 'text-success' : 'text-warning' %>">
+            <strong><%= offer.premium? ? 'Yes' : 'No' %></strong>
+          </td>
+          <td><a href="#">Edit</a></td>
+          <td>
+          <% if offer.enabled? %>
+            <a href="#">Disable</a>
+          <% else %>
+            <a href="#"> Enable</a>
+          <% end %>
+          </td>
+          <td><%= link_to 'Destroy', offer_path(offer), method: 'delete', data: { confirm: "Do you really wanna destroy the offer #{offer.id}", disable_with: 'Processing...' } %></td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr>
-        <td><%= offer.advertiser_name %></td>
-        <td><%= offer.url %></td>
-        <td><%= offer.description.truncate(25)%></td>
-        <td><%= offer.starts_at.strftime('%d/%m/%Y %H:%M') %></td>
-        <td><%= offer.ends_at %></td>
-        <td class="<%= offer.premium? ? 'text-success' : 'text-warning' %>">
-          <strong><%= offer.premium? ? 'Yes' : 'No' %></strong>
-        </td>
-        <td><a href="#">Edit</a></td>
-        <td>
-        <% if offer.enabled? %>
-          <a href="#">Disable</a>
-        <% else %>
-          <a href="#"> Enable</a>
-        <% end %>
-        </td>
-        <td><a href="#">Destroy</a></td>
+        <td colspan="9" class="text-center text-warning"> 0 offers found</td>
       </tr>
     <% end %>
   </tbody>
