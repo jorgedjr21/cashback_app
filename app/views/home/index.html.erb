@@ -1,1 +1,38 @@
-HOME INDEX
+<% if @offers.blank? %>
+
+<div class='row'>
+  <div class='col-md-8 mr-auto ml-auto'>
+    <div class='card'>
+      <div class='card-body'>
+        <p class="text-warning">No offers to show</p>
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+  <div class="row">
+    <% @offers.each do |offer| %>
+      <div class="col-md-6">
+        <div class="card mr-auto ml-auto mb-3 border-secondary">
+          <h3 class="card-header">
+            <%= offer.advertiser_name %>
+            <% if offer.premium? %> <span class="badge badge-warning float-right">Premium</span> <% end %>
+          </h3>
+          <div class="card-body text-center">
+            <p><a href="<%= offer.url %>" class='btn btn-info btn-lg'> Shop now </a></p>
+            <p>
+              <button type="button" class="btn btn-outline-secondary" title="" data-container="body" data-toggle="popover" 
+                      data-placement="bottom" data-content="<%= offer.description %>" data-original-title="Offer <%= offer.id %>" 
+                      aria-describedby="popover">Description</button>
+            </p>
+          </div>
+          <div class="card-footer">
+            <% if offer.ends_at.present? %>
+              <strong>This offers ends in:</strong> <%= distance_of_time_in_words(Time.zone.now, offer.ends_at) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
