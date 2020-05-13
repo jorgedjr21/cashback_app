@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/admin', to: 'admin#index'
-  resources 'offers', only: [:new, :create, :destroy] do
+  resources 'offers', except: %i[index show] do
     member do
       put 'disable', to: 'offers#disable'
       put 'enable', to: 'offers#enable'

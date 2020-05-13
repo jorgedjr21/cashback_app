@@ -22,7 +22,9 @@
           <td class="<%= offer.premium? ? 'text-success' : 'text-warning' %>">
             <strong><%= offer.premium? ? 'Yes' : 'No' %></strong>
           </td>
-          <td><a href="#">Edit</a></td>
+          <td>
+            <%= link_to 'Edit', edit_offer_path(offer), class: 'btn btn-outline-info' %>
+          </td>
           <td>
           <% if offer.enabled? %>
             <%= link_to 'Disable', disable_offer_path(offer), method: 'put', class: 'btn btn-outline-warning' %>

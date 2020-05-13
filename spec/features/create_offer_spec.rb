@@ -9,14 +9,15 @@ RSpec.feature 'CreateOffers Page', type: :feature do
 
     context 'with form filled_in correctly' do
       it 'must create offer with correct data in form' do
-        visit '/offers/new'
+        visit '/admin'
+        click_link 'New Offer'
 
         fill_in 'offer_advertiser_name', with: 'Offer Name'
         fill_in 'offer_url', with: 'http://test.com'
         fill_in 'offer_description', with: 'Offer Name'
         fill_in 'offer_starts_at', with: '10/01/2020'
         fill_in 'offer_ends_at', with: ''
-        click_button 'Create Offer'
+        click_button 'Save'
 
         expect(page).to have_content('Offer created with success!')
         expect(page).to have_content('Offer Name')
@@ -33,7 +34,7 @@ RSpec.feature 'CreateOffers Page', type: :feature do
         fill_in 'offer_description', with: ''
         fill_in 'offer_starts_at', with: ''
         fill_in 'offer_ends_at', with: ''
-        click_button 'Create Offer'
+        click_button 'Save'
 
         expect(page).to have_content('Advertiser name can\'t be blank')
         expect(page).to have_content('Url can\'t be blank and Url is not a valid URL')

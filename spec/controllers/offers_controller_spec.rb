@@ -3,6 +3,41 @@ require 'rails_helper'
 RSpec.describe OffersController, type: :controller do
   let!(:user) { create(:user) }
 
+  describe 'PUT offers/:id' do
+    let!(:offer) { create(:offer) }
+    context 'signed_in' do
+      before :each do
+        sign_in user
+      end
+
+      context 'when offer exists' do
+        it 'must update the offer' do
+          params = { id: offer.id,  offer: { advertiser_name: 'New Name' } }
+          put :update, params: params
+
+          expect(offer.reload.advertiser_name).to eq('New Name')
+        end
+      end
+
+      context 'when offer doesn\'t exists' do
+        it 'must redirect to admin page' do
+          put :update, params: { id: 999 }
+          expect(response).to redirect_to(admin_path)
+        end
+      end
+    end
+
+    context 'not signed in' do
+      it 'must not allow user access' do
+        params = { id: offer.id,  offer: { advertiser_name: 'New Name' } }
+        put :update, params: params
+
+        expect(response).to redirect_to(new_user_session_path)
+
+      end
+    end
+  end
+
   describe 'DELETE /offers' do
     let!(:offer) { create(:offer) }
     context 'signed_in' do

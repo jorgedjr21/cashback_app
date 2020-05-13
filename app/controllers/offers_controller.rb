@@ -1,6 +1,6 @@
 class OffersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_offer, only: %i[destroy enable disable]
+  before_action :set_offer, only: %i[destroy enable disable edit update]
 
   def new
     @offer = Offer.new
@@ -14,6 +14,18 @@ class OffersController < ApplicationController
     else
       flash[:alert] = 'Some errors occured when trying to create a new offer'
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @offer.update(offer_params)
+      redirect_to admin_path, flash: { notice: "Offer #{@offer.id} updated with success!" }
+    else
+      flash[:alert] = 'Some errors occured when trying to update the offer'
+      render :edit
     end
   end
 
